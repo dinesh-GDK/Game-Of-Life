@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang='en'>
+  <head>
+    <title>Conway's Game of Life</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
+    <script src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous'></script>
+    <link rel='stylesheet' href='gol_style.css'>
+  </head>
+    
+  <body>
+
+    <nav class='navbar navbar-expand-lg navbar-light'>
+      <a class='navbar-brand' onclick='location.reload()'><h4>Conway's Game of Life</h4></a>
+      <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation'>
+        <span class='navbar-toggler-icon'></span>
+      </button>
+      <div class='collapse navbar-collapse' id='navbarNavDropdown'>
+        <ul class='navbar-nav'>
+
+          <li class='btn-group nav-item mr-3 mt-1' role='group'>
+            <button id='next' class='btn btn-secondary'>Next Gen</button>
+            <button id='play' class='btn btn-secondary'>Play</button>
+            <button id='pause' class='btn btn-secondary'>Pause</button>
+            <button id='clear' class='btn btn-secondary'>Clear</button>
+          </li>
+
+          <li class='nav-item mr-3 mt-1'>
+            <select id='pattern'>
+              <option selected disabled hidden>Choose a Pattern</option>
+              <optgroup label='Oscillators'>
+                <option value='blinker'>Blinker</option>
+                <option value='toad'>Toad</option>
+                <option value='beacon'>Beacon</option>
+                <option value='pulsar'>Pulsar</option>
+                <option value='pentadeca'>Penta-decathlon</option>
+              </optgroup>
+              <optgroup label='Spaceships'>
+                <option value='glider'>Glider</option>
+                <option value='lwss'>Light-weight spaceship</option>
+                <option value='mwss'>Middle-weight spaceship</option>
+                <option value='hwss'>Heavy-weight spaceship</option>
+              </optgroup>
+              <optgroup label='Guns'>
+                <option value='gun'>Gosper's glider gun</option>
+              </optgroup>
+            </select>
+          </li>
+
+          <li id='slider' class='mr-3 mt-1'>
+            <div>Pace</div>
+            <div><input id='pace' type='range' min='10' max='500'></div>
+          </li>
+
+          <li class='nav-item mt-1'>
+            <button id='info' class='btn btn-secondary' data-toggle='modal' data-target='#staticBackdrop'><b>?</b></button>
+          </li>
+        
+        </ul>
+      </div>
+    </nav>
+
+    <div id='inst' class='d-flex text-dark justify-content-around mt-2'>
+      <div class='d-flex'>
+        <div></div>
+        <h6 class='ml-2'>Live cell</h6>
+      </div>
+      <div class='d-flex'>
+        <div></div>
+        <h6 class='ml-2'>Dead cell</h6>
+      </div>      
+    </div>
+
+    <table id='board'></table>
+    
+    <!-- Modal -->
+    <div class='modal fade' id='staticBackdrop' data-backdrop='static' data-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+      <div class='modal-dialog modal-lg'>
+        <div class='modal-content'>
+
+          <div class='modal-header'>
+            <h3 class='modal-title' id='staticBackdropLabel'>Conway's Game of Life</h3>
+            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+              <span aria-hidden='true'>&times;</span>
+            </button>
+          </div>
+
+          <div class='modal-body' id='tutorial'>
+            
+            <div>
+              <h3>Welcome of Conway's Game of Life</h3>
+              <p>
+                The Game of Life, also known simply as Life, is a cellular automaton 
+                devised by the British mathematician John Horton Conway in 1970.
+              </p>
+              <p>
+                The world of Game of life is typically a two-dimentional infinitely 
+                long plane. But in this application we are restricted to the size 
+                of the screen. This plane is divided into small square cells with 
+                each of them in two possible states, <b>live</b> or <b>dead</b>.
+              </p>
+              <p>The rules of <b>Game of Life</b> are:</p>
+              <ul class="text-left">
+                <li>A live cell with fewer than two live neighbouring cells dies (underpopulation)</li>
+                <li>A live cell with more than three live neighbouring cells dies (overpopulation)</li>
+                <li>A live cell with two or three live neighbouring survives</li>
+                <li>A dead cell with three neighbourig cells becomes a live cell (reproduction)</li>
+              </ul>
+              <b>Credits</b>: For more info <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life' target='_blank'>Click here</a>.
+            </div>
+
+            <div>
+              <h5>Click and drag on the board to create live cells</h5>
+              <img src='gol_images/select.gif'>
+            </div>
+
+            <div>
+              <h5>Use these options to do your simulation</h5>
+              <img src='gol_images/actions.png'>
+              
+              <ul class="text-left">
+                <li><b>Next Gen</b> - To display the next generation</li>
+                <li><b>Play</b> - To start the simulation</li>
+                <li><b>Pause</b> - To stop the simulation</li>
+                <li><b>Clear</b> - To clear the board</li>
+              </ul>
+              <h5>You can set the pace of the simulation even in real time</h5>
+              <img src='gol_images/pace.gif'>
+            </div>
+
+            <div>
+              <h6>You can choose pre-built patterns to run your simulation. Try one it will amuse you!</h6>
+              <img src='gol_images/pattern.png'>
+            </div>
+            
+            <div>
+              <h2>Have Fun!</h2>
+              For the source code of this application checkout my <a href='#'>GitHub</a>.
+            </div>
+            
+          </div>
+
+          <div class='modal-footer justify-content-between'>
+            <button class='btn btn-secondary' id='pre'>Previous</button>
+            <div id='page_no'></div>
+            <button class='btn btn-secondary' id='nxt'>Next</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+  <script src='gol_patterns.js'></script>
+  <script src='gol.js'></script>
+    
+</html>

@@ -1,0 +1,127 @@
+body {
+  margin: 0;
+  background-color: #94949E;
+  color: white;
+}
+
+.navbar {
+    background-color: black;
+  }
+  .navbar-toggler {
+    background-color: white;
+  }
+
+  .navbar-brand {
+    cursor: pointer;
+  }
+
+  .navbar > div {
+    justify-content: flex-end;
+}
+
+.btn-group > button {
+  border-right-width: 2px;
+  border-left-width: 2px;
+  border-color: black;
+}
+
+#pattern {
+    height: 38px;
+    border-radius: 5px;
+    background-color: #686871;
+    color: white;
+    padding-left: 5px;
+    cursor: pointer;
+  }
+
+  #pattern > optgroup {
+    background-color: #94949E;
+  }
+
+  #pattern option {
+    background-color: #CDCDDD;
+    color: black;
+}
+
+#slider {
+    display: flex;
+    border-radius: 5px;
+    color: white;
+    background-color: #686871;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 7px;
+    width: 200px;
+  }
+
+  #slider > div:nth-child(2) {
+    padding-top: 3px;
+    padding-left: 5px;
+  }
+
+#info {
+  border-radius: 30px;
+}
+
+#inst > div:nth-child(1) > div {
+    width: 20px;
+    height: 20px;
+    border: solid;
+    border-width: 1px;
+    background-color: white;
+  }
+
+  #inst > div:nth-child(2) > div {
+    width: 20px;
+    height: 20px;
+    border: solid;
+    border-width: 1px;
+    background-color: black;
+}
+
+#board {
+  margin: auto;
+  background-color: black;
+  cursor: grab;
+}
+
+.cell {
+  border: solid;
+  border-color: #94949E;
+  border-width: 1px;
+}
+
+.modal-dialog {
+    width: 50%;
+    color: black;
+    margin-top: 75px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .modal-header {
+    background-color: #CDCDDD;
+  }
+
+  .modal-body {
+    height: auto;
+    min-height: 405px;
+    background-color: black;
+    color: #CDCDDD;
+  }
+
+  .modal-footer {
+    background-color: #CDCDDD;
+    border-radius: 5px;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body > div {
+  text-align: center;
+  display: block;
+  margin: auto;  
+}
