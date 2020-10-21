@@ -2,7 +2,7 @@
 
 The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.
 
-You can access my web application of Conway's game of life [here](https://dinesh-gdk.github.io/Game-Of-Life/). 
+You can access my web application of Conway's game of life [here](https://github.com/dinesh-GDK/Game-Of-Life/). 
 
 The world of Game of life is typically a two-dimentional infinitely long plane. But in this application we are restricted to the size of the screen. This plane is divided into small square cells with  each of them in two possible states, **live** or **dead**.
 
