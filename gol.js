@@ -2,14 +2,15 @@ const cellDim = 20;
 const minRow = 25;
 const minCol = 38;
 
-var rows = Math.floor(window.innerHeight/cellDim) - 5;
-var cols = Math.floor(window.innerWidth/cellDim) - 2;
+let rows = Math.floor(window.innerHeight/cellDim) - 5;
+let cols = Math.floor(window.innerWidth/cellDim) - 2;
+let popCount = 0;
 
 rows = rows > minRow ? rows : minRow;
 cols = cols > minCol ? cols : minCol;
 
-var grid = [...Array(rows)].map(e => Array(cols).fill(0));
-var nxtGrid = [...Array(rows)].map(e => Array(cols).fill(0));
+let grid = [...Array(rows)].map(e => Array(cols).fill(0));
+let nxtGrid = [...Array(rows)].map(e => Array(cols).fill(0));
 
 const live_color = 'white';
 const dead_color = 'black';
@@ -21,6 +22,7 @@ const pause = document.getElementById('pause');
 const clear = document.getElementById('clear');
 const pattern = document.getElementById('pattern');
 const pace = document.getElementById('pace');
+const popDisp = document.getElementById('popCount');
 
 const board = document.getElementById('board');
 createBoard();
@@ -32,7 +34,7 @@ pause.disabled = true;
 next.onclick = () => nextGen();
 clear.onclick = () => clearBoard();
 
-var timer;    
+let timer;    
 play.onclick = () => {
     next.disabled = true;
     play.disabled = true;
@@ -56,19 +58,19 @@ pause.onclick = () => {
 
 pattern.onchange = () => {
     clearBoard();
-    var shift = 1;
+    let shift = 1;
     if(pattern.value === 'gun')     shift = 0;
     const fig = eval(pattern.value);
-    for(var i=0; i<fig.length; ++i) {
+    for(let i=0; i<fig.length; ++i) {
         toggle(fig[i][0] + shift * Math.floor(rows/2), fig[i][1] + Math.floor(cols/2));
     }
 }
 
 function createBoard() {
 
-    for(var i=0; i<rows; ++i) {
+    for(let i=0; i<rows; ++i) {
         const board_row = document.createElement('tr');
-        for(var j=0; j<cols; ++j) {
+        for(let j=0; j<cols; ++j) {
             board_row.appendChild(createCell(i, j));
         } 
         board.appendChild(board_row);
@@ -95,25 +97,29 @@ function toggle(i, j) {
     if(grid[i][j] === 0) {
         grid[i][j] = 1;
         getCell(i, j).style.backgroundColor = live_color;
+        popCount++;
     } else {
         grid[i][j] = 0;
         getCell(i, j).style.backgroundColor = dead_color;
+        popCount--;
     }
 
     next.disabled = false;
     play.disabled = false;
+    popDisp.innerHTML = popCount;
 }
 
 function nextGen(repeat=0) {
+    popCount = 0;
 
-    for(var i=0; i<rows; ++i) {
-        for(var j=0; j<cols; ++j) {
+    for(let i=0; i<rows; ++i) {
+        for(let j=0; j<cols; ++j) {
 
             const cellState = grid[i][j];
-            var liveNeighbours = 0;
+            let liveNeighbours = 0;
 
-            for(var x=-1; x<=1; ++x) {
-                for(var y=-1; y<=1; ++y) {
+            for(let x=-1; x<=1; ++x) {
+                for(let y=-1; y<=1; ++y) {
                     if(i+x > 0 && j+y > 0 && i+x < rows && j+y < cols) {
                         liveNeighbours += grid[i+x][j+y];
                     }
@@ -134,15 +140,18 @@ function nextGen(repeat=0) {
     }
 
     // update start
-    for(var i=0; i<rows; ++i) {
-        for(var j=0; j<cols; j++) {
+    for(let i=0; i<rows; ++i) {
+        for(let j=0; j<cols; j++) {
             if(nxtGrid[i][j] === 1) {
                 getCell(i, j).style.backgroundColor = live_color;
+                popCount++;
             } else {
                 getCell(i, j).style.backgroundColor = dead_color;
             }
         }
     }
+
+    popDisp.innerHTML = popCount;
 
     grid = nxtGrid;
     nxtGrid = [...Array(rows)].map(e => Array(cols).fill(0));
@@ -158,16 +167,19 @@ function nextGen(repeat=0) {
 
 function clearBoard() {
 
-    for(var i=0; i<rows; ++i) {
-        for(var j=0; j<cols; j++) {
+    for(let i=0; i<rows; ++i) {
+        for(let j=0; j<cols; j++) {
             grid[i][j] = 0;
             getCell(i, j).style.backgroundColor = dead_color;
         }
     }
 
+    popCount = 0;
+
     next.disabled = true;
     play.disabled = true;
     pause.disabled = true;
+    popDisp.innerHTML = 0;
 }
 
 function getCell(i, j) {
@@ -177,7 +189,7 @@ function getCell(i, j) {
 
 // tutorial
 const tutorial = document.getElementById('tutorial').querySelectorAll('div');
-var page_no = 1;
+let page_no = 1;
 
 info.onclick = () => changePage(0);
 document.getElementById('nxt').onclick = () => changePage(1);
@@ -194,4 +206,4 @@ function changePage(direction) {
     }
 }
 
-document.getElementById('info').click();
+// document.getElementById('info').click();

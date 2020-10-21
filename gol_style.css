@@ -63,6 +63,16 @@ body {
   border-radius: 30px;
 }
 
+#inst {
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#inst > div {
+  display: flex;
+}
+
 #inst > div:nth-child(1) > div {
     width: 20px;
     height: 20px;
@@ -77,6 +87,17 @@ body {
     border: solid;
     border-width: 1px;
     background-color: black;
+  }
+
+  #inst > div:nth-child(3) > p {
+    margin: 0px;
+    display: flex;
+}
+
+#popCount {
+  display: block;
+  width: 50px;
+  text-align: center;
 }
 
 #board {

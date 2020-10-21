@@ -3,7 +3,7 @@
 <html lang='en'>
   <head>
     <title>Conway's Game of Life</title>
-    <link rel="icon" href="data:,">
+    <link rel='icon' href='./gol_images/icon.svg' type='image/ico'/>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
     <script src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous'></script>
@@ -62,14 +62,17 @@
       </div>
     </nav>
 
-    <div id='inst' class='d-flex text-dark justify-content-around mt-2'>
-      <div class='d-flex'>
+    <div id='inst' class='mt-2'>
+      <div>
         <div></div>
         <h6 class='ml-2'>Live cell</h6>
       </div>
-      <div class='d-flex'>
+      <div>
         <div></div>
         <h6 class='ml-2'>Dead cell</h6>
+      </div>
+      <div>
+        <p><b>Current Population: </b><span id='popCount'>0</span></p>
       </div>      
     </div>
 
@@ -102,7 +105,7 @@
                 each of them in two possible states, <b>live</b> or <b>dead</b>.
               </p>
               <p>The rules of <b>Game of Life</b> are:</p>
-              <ul class="text-left">
+              <ul class='text-left'>
                 <li>A live cell with fewer than two live neighbouring cells dies (underpopulation)</li>
                 <li>A live cell with more than three live neighbouring cells dies (overpopulation)</li>
                 <li>A live cell with two or three live neighbouring survives</li>
@@ -120,7 +123,7 @@
               <h5>Use these options to do your simulation</h5>
               <img src='gol_images/actions.png'>
               
-              <ul class="text-left">
+              <ul class='text-left'>
                 <li><b>Next Gen</b> - To display the next generation</li>
                 <li><b>Play</b> - To start the simulation</li>
                 <li><b>Pause</b> - To stop the simulation</li>
