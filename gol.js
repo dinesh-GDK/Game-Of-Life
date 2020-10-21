@@ -206,4 +206,4 @@ function changePage(direction) {
     }
 }
 
-// document.getElementById('info').click();
+document.getElementById('info').click();
